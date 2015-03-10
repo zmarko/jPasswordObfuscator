@@ -4,13 +4,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>rs.in.zivanovic</groupId>
-    <artifactId>j-password-obfuscator-parent</artifactId>
+    <artifactId>j-password-obfuscator</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     
-    <name>JPasswordObfuscator parent</name>
+    <name>JPasswordObfuscator library</name>
     <description>
-        Extensible Java library and command line utility for sensitive data obfuscation and de-obfuscation.
+        Extensible Java library for sensitive data obfuscation and de-obfuscation.
         Solution for protecting passwords and other sensitive data in configuration files or in transit from casual glances.
         Not at all useful for protecting sensitive data from attackers bent on stealing your secrets.
     </description>
@@ -40,10 +40,25 @@
         <name>Marko Zivanovic</name>
         <url>http://marko.zivanovic.in.rs</url>
     </organization>
-
-    <modules>
-        <module>jPasswordObfuscator-lib</module>
-        <module>jPasswordObfuscator-bin</module>
-    </modules>
         
+    <dependencies>
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+            <version>1.52</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.10</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+    </properties>
+    
 </project>

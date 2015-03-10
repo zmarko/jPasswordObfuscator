@@ -14,6 +14,7 @@
         Solution for protecting passwords and other sensitive data in configuration files or in transit from casual glances.
         Not at all useful for protecting sensitive data from attackers bent on stealing your secrets.
     </description>
+    <url>https://github.com/zmarko/jPasswordObfuscator</url>
     
     <licenses>
         <license>
@@ -53,9 +54,9 @@
             <version>18.0</version>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>rs.in.zivanovic</groupId>
             <artifactId>j-password-obfuscator</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>1.0.0</version>
         </dependency>
     </dependencies>
     

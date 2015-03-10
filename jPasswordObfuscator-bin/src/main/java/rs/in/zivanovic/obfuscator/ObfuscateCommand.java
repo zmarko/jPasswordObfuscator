@@ -31,8 +31,6 @@ import java.util.List;
 
 /**
  * Implementation of the obfuscate command.
- *
- * @author Marko Zivanovic <marko@zivanovic.in.rs>
  */
 @Parameters(commandDescription = "Obfuscate sensitive data")
 public class ObfuscateCommand implements Runnable {

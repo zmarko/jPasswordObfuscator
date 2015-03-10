@@ -25,8 +25,6 @@ package rs.in.zivanovic.obfuscator.impl;
 
 /**
  * Obfuscator/de-obfuscator interface.
- *
- * @author Marko Zivanovic <marko@zivanovic.in.rs>
  */
 public interface Obfuscator {
 
@@ -34,7 +32,7 @@ public interface Obfuscator {
      * Obfuscate sensitive data using supplied master key.
      *
      * @param masterKey master key to use for data obfuscation
-     * @param data      sensitive data to obfuscate
+     * @param data sensitive data to obfuscate
      *
      * @return obfuscated string
      */
@@ -44,7 +42,7 @@ public interface Obfuscator {
      * De-obfuscate data using supplied master key.
      *
      * @param masterKey master key to use for data de-obfuscation; must match master key used for obfuscation
-     * @param data      string obfuscated with {@link #obfuscate} to de-obfuscate
+     * @param data string obfuscated with {@link #obfuscate} to de-obfuscate
      *
      * @return
      */

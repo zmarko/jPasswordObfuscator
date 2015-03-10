@@ -31,8 +31,6 @@ import javax.crypto.spec.PBEKeySpec;
 
 /**
  * Password Based Encryption (PBE) based obfuscator. Use as a base class for further specializations.
- *
- * @author Marko Zivanovic <marko@zivanovic.in.rs>
  */
 public class PBEObfuscatorImpl implements Obfuscator {
 

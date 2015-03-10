@@ -24,15 +24,12 @@
 package rs.in.zivanovic.obfuscator;
 
 import com.beust.jcommander.JCommander;
-import com.beust.jcommander.ParameterException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
 /**
  * Main entry point.
- *
- * @author Marko Zivanovic <marko@zivanovic.in.rs>
  */
 public class Main {
 

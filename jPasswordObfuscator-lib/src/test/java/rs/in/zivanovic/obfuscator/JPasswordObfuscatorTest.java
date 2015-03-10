@@ -30,8 +30,6 @@ import org.junit.Test;
 
 /**
  * Obfuscator unit tests.
- *
- * @author Marko Zivanovic <marko@zivanovic.in.rs>
  */
 public class JPasswordObfuscatorTest {
 

@@ -29,8 +29,6 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
 /**
  * PBE-based obfuscator using <em>PBEWithSHA256And128BitAES</em> algorithm with 16,000 rounds, 8 bytes of randomly
  * generated salt and BouncyCastle as crypto provider.
- *
- * @author Marko Zivanovic <marko@zivanovic.in.rs>
  */
 public class V1ObfuscatorImpl extends PBEObfuscatorImpl {
 

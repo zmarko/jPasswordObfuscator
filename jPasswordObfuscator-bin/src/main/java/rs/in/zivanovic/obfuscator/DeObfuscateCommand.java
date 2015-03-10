@@ -30,9 +30,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 /**
- * Implementation of the obfuscate command.
- *
- * @author Marko Zivanovic <marko@zivanovic.in.rs>
+ * Implementation of the de-obfuscate command.
  */
 @Parameters(commandDescription = "De-obfuscate sensitive data")
 public class DeObfuscateCommand implements Runnable {

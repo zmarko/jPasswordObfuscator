@@ -27,8 +27,6 @@ import org.bouncycastle.util.encoders.Base64;
 
 /**
  * Container for obfuscated data.
- *
- * @author Marko Zivanovic <marko@zivanovic.in.rs>
  */
 public class ObfuscatedData {
 

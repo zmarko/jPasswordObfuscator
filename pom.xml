@@ -46,4 +46,8 @@
         <module>jPasswordObfuscator-bin</module>
     </modules>
         
+    <prerequisites>
+        <maven>3.0.4</maven>
+    </prerequisites>
+    
 </project>

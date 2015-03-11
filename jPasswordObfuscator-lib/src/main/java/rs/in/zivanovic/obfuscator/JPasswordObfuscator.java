@@ -42,7 +42,7 @@ public final class JPasswordObfuscator {
      * Obfuscate data using supplied master key and current algorithm version.
      *
      * @param masterKey master key to use for obfuscation
-     * @param data data to obfuscate
+     * @param data      data to obfuscate
      *
      * @return string containing obfuscated data; use {@link #deObfuscate} to get secret data from this string
      */
@@ -54,8 +54,8 @@ public final class JPasswordObfuscator {
      * Obfuscate data using supplied master key and algorithm version.
      *
      * @param masterKey master key to use for obfuscation
-     * @param data data to obfuscate
-     * @param version obfuscation algorithm version to use
+     * @param data      data to obfuscate
+     * @param version   obfuscation algorithm version to use
      *
      * @return string containing obfuscated data; use {@link #deObfuscate} to get secret data from this string
      */
@@ -73,7 +73,7 @@ public final class JPasswordObfuscator {
     /**
      * De-obfuscate string generated with {@link #obfuscate} method.
      *
-     * @param masterKey master key to use for de-obfuscation; must match the key used for obfuscation
+     * @param masterKey        master key to use for de-obfuscation; must match the key used for obfuscation
      * @param obfuscatedString obfuscated string generated using one of {@link #obfuscate} methods
      *
      * @return original, de-obfuscated data
@@ -82,11 +82,11 @@ public final class JPasswordObfuscator {
         Objects.requireNonNull(masterKey);
         Objects.requireNonNull(obfuscatedString);
         ObfuscatedData ob = ObfuscatedData.fromString(obfuscatedString);
-        switch (ob.version) {
+        switch (ob.getVersion()) {
             case 1:
                 return v1Obfuscator.deObfuscate(masterKey, ob);
             default:
-                throw new IllegalArgumentException("Unsupported version: " + ob.version);
+                throw new IllegalArgumentException("Unsupported version: " + ob.getVersion());
         }
     }
 

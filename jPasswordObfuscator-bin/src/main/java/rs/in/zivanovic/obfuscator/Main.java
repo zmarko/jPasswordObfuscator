@@ -33,7 +33,10 @@ import java.util.Map.Entry;
  */
 public class Main {
 
-    public static void main(String args[]) {
+    private Main() {
+    }
+
+    public static void main(String[] args) {
         JCommander jc = new JCommander();
         Map<String, Runnable> commands = new HashMap<>();
         Map<String, String[]> aliases = new HashMap<>();
@@ -55,7 +58,7 @@ public class Main {
                 jc.usage();
             }
         } catch (RuntimeException ex) {
-            System.err.println(ex.getMessage());
+            System.err.println("ERROR: " + ex.getMessage());
         }
     }
 

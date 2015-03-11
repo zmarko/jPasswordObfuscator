@@ -23,6 +23,7 @@
  */
 package rs.in.zivanovic.obfuscator.impl;
 
+import java.util.Arrays;
 import org.bouncycastle.util.encoders.Base64;
 
 /**
@@ -31,14 +32,14 @@ import org.bouncycastle.util.encoders.Base64;
 public class ObfuscatedData {
 
     private static final String SIGNATURE = "rizobf";
-    public final int version;
-    public final byte[] salt;
-    public final byte[] cipherText;
+    private final int version;
+    private final byte[] salt;
+    private final byte[] cipherText;
 
     public ObfuscatedData(int version, byte[] salt, byte[] cipherText) {
         this.version = version;
-        this.salt = salt;
-        this.cipherText = cipherText;
+        this.salt = Arrays.copyOf(salt, salt.length);
+        this.cipherText = Arrays.copyOf(cipherText, cipherText.length);
     }
 
     @Override
@@ -56,6 +57,18 @@ public class ObfuscatedData {
             throw new IllegalArgumentException("Invalid obfuscated data");
         }
         return new ObfuscatedData(Integer.parseInt(parts[2]), Base64.decode(parts[3]), Base64.decode(parts[4]));
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public byte[] getSalt() {
+        return salt;
+    }
+
+    public byte[] getCipherText() {
+        return cipherText;
     }
 
 }

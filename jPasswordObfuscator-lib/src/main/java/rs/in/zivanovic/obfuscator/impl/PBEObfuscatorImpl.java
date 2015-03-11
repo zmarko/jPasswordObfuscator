@@ -55,16 +55,16 @@ public class PBEObfuscatorImpl implements Obfuscator {
             byte[] cipher = crypto(Cipher.ENCRYPT_MODE, data, masterKey, salt);
             return new ObfuscatedData(version, salt, cipher);
         } catch (GeneralSecurityException ex) {
-            throw new RuntimeException(ex);
+            throw new ObfuscatorException(ex);
         }
     }
 
     @Override
     public byte[] deObfuscate(char[] masterKey, ObfuscatedData ob) {
         try {
-            return crypto(Cipher.DECRYPT_MODE, ob.cipherText, masterKey, ob.salt);
+            return crypto(Cipher.DECRYPT_MODE, ob.getCipherText(), masterKey, ob.getSalt());
         } catch (GeneralSecurityException ex) {
-            throw new RuntimeException(ex);
+            throw new ObfuscatorException(ex);
         }
     }
 

@@ -47,3 +47,14 @@ When we want to un-obfuscate data:
 and we get our original super secret data back:
 
     Hello World
+
+### Design
+
+Obfuscated data is formatted according to [Modular Crypt Format](https://pythonhosted.org/passlib/modular_crypt_format.html).
+We're using `$rizobf$` as an identifier. Second field is the obfuscation algorithm version. Current version is 1.
+
+Version 1 algorithm is Password Based Encryption (PKCS#5) with SHA-256, AES-128 in CBC mode, 16,000 rounds
+for key derivation and 8 random bytes of salt.
+
+Additional obfuscation versions will be added with varying algorithms and parameters, as necessary to keep brute-forcing
+obfuscated data infeasible.

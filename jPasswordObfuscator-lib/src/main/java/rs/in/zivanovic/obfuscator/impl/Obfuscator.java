@@ -24,7 +24,7 @@
 package rs.in.zivanovic.obfuscator.impl;
 
 /**
- * Obfuscator/de-obfuscator interface.
+ * Obfuscator/un-obfuscator interface.
  */
 public interface Obfuscator {
 
@@ -39,12 +39,12 @@ public interface Obfuscator {
     ObfuscatedData obfuscate(char[] masterKey, byte[] data);
 
     /**
-     * De-obfuscate data using supplied master key.
+     * un-obfuscate data using supplied master key.
      *
-     * @param masterKey master key to use for data de-obfuscation; must match master key used for obfuscation
-     * @param data string obfuscated with {@link #obfuscate} to de-obfuscate
+     * @param masterKey master key to use for data un-obfuscation; must match master key used for obfuscation
+     * @param data string obfuscated with {@link #obfuscate} to un-obfuscate
      *
      * @return
      */
-    byte[] deObfuscate(char[] masterKey, ObfuscatedData data);
+    byte[] unObfuscate(char[] masterKey, ObfuscatedData data);
 }

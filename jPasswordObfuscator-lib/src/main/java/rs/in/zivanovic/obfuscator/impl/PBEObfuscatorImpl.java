@@ -60,7 +60,7 @@ public class PBEObfuscatorImpl implements Obfuscator {
     }
 
     @Override
-    public byte[] deObfuscate(char[] masterKey, ObfuscatedData ob) {
+    public byte[] unObfuscate(char[] masterKey, ObfuscatedData ob) {
         try {
             return crypto(Cipher.DECRYPT_MODE, ob.getCipherText(), masterKey, ob.getSalt());
         } catch (GeneralSecurityException ex) {

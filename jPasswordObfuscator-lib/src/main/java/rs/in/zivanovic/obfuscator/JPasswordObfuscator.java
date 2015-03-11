@@ -29,7 +29,7 @@ import rs.in.zivanovic.obfuscator.impl.Obfuscator;
 import rs.in.zivanovic.obfuscator.impl.V1ObfuscatorImpl;
 
 /**
- * Obfuscate and de-obfuscate sensitive data.
+ * Obfuscate and un-obfuscate sensitive data.
  *
  * This method is useful for protecting potentially sensitive data from casual onlookers. It is NOT secure against
  * attackers with access to source code or live systems.
@@ -44,7 +44,7 @@ public final class JPasswordObfuscator {
      * @param masterKey master key to use for obfuscation
      * @param data      data to obfuscate
      *
-     * @return string containing obfuscated data; use {@link #deObfuscate} to get secret data from this string
+     * @return string containing obfuscated data; use {@link #unObfuscate} to get secret data from this string
      */
     public String obfuscate(char[] masterKey, byte[] data) {
         return obfuscate(masterKey, data, 1);
@@ -57,7 +57,7 @@ public final class JPasswordObfuscator {
      * @param data      data to obfuscate
      * @param version   obfuscation algorithm version to use
      *
-     * @return string containing obfuscated data; use {@link #deObfuscate} to get secret data from this string
+     * @return string containing obfuscated data; use {@link #unObfuscate} to get secret data from this string
      */
     public String obfuscate(char[] masterKey, byte[] data, int version) {
         Objects.requireNonNull(masterKey);
@@ -71,20 +71,20 @@ public final class JPasswordObfuscator {
     }
 
     /**
-     * De-obfuscate string generated with {@link #obfuscate} method.
+     * Un-obfuscate string generated with {@link #obfuscate} method.
      *
-     * @param masterKey        master key to use for de-obfuscation; must match the key used for obfuscation
+     * @param masterKey        master key to use for un-obfuscation; must match the key used for obfuscation
      * @param obfuscatedString obfuscated string generated using one of {@link #obfuscate} methods
      *
-     * @return original, de-obfuscated data
+     * @return original, un-obfuscated data
      */
-    public byte[] deObfuscate(char[] masterKey, String obfuscatedString) {
+    public byte[] unObfuscate(char[] masterKey, String obfuscatedString) {
         Objects.requireNonNull(masterKey);
         Objects.requireNonNull(obfuscatedString);
         ObfuscatedData ob = ObfuscatedData.fromString(obfuscatedString);
         switch (ob.getVersion()) {
             case 1:
-                return v1Obfuscator.deObfuscate(masterKey, ob);
+                return v1Obfuscator.unObfuscate(masterKey, ob);
             default:
                 throw new IllegalArgumentException("Unsupported version: " + ob.getVersion());
         }

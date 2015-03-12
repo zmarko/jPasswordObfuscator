@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>rs.in.zivanovic</groupId>
     <artifactId>j-password-obfuscator</artifactId>
-    <version>1.1.0-SNAPSHOT</version>
+    <version>1.1.0</version>
     <packaging>jar</packaging>
     
     <name>JPasswordObfuscator library</name>
@@ -39,7 +39,7 @@
         <connection>scm:git:git@github.com:zmarko/jPasswordObfuscator.git</connection>
         <developerConnection>scm:git:git@github.com:zmarko/jPasswordObfuscator.git</developerConnection>
         <url>git@github.com:zmarko/jPasswordObfuscator.git</url>
-        <tag>HEAD</tag>
+        <tag>j-password-obfuscator-1.1.0</tag>
     </scm>
         
     <dependencies>

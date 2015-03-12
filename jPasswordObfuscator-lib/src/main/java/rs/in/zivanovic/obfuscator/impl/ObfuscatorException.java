@@ -28,6 +28,11 @@ package rs.in.zivanovic.obfuscator.impl;
  */
 public class ObfuscatorException extends RuntimeException {
 
+    /**
+     * Wrap throwable into obfuscator exception.
+     *
+     * @param cause throwable to wrap
+     */
     public ObfuscatorException(Throwable cause) {
         super(cause);
     }

@@ -40,6 +40,15 @@ public class PBEObfuscatorImpl implements Obfuscator {
     private final int iterations;
     private final int saltLen;
 
+    /**
+     * Build new PBE-based obfuscator with specified parameters.
+     *
+     * @param version    version number for this set of parameters
+     * @param algo       encryption algorithm to use
+     * @param provider   crypto provider
+     * @param iterations number of key derivation rounds
+     * @param saltLen    length of random salt in bytes
+     */
     public PBEObfuscatorImpl(int version, String algo, String provider, int iterations, int saltLen) {
         this.algo = algo;
         this.provider = provider;
@@ -60,7 +69,7 @@ public class PBEObfuscatorImpl implements Obfuscator {
     }
 
     @Override
-    public byte[] deObfuscate(char[] masterKey, ObfuscatedData ob) {
+    public byte[] unObfuscate(char[] masterKey, ObfuscatedData ob) {
         try {
             return crypto(Cipher.DECRYPT_MODE, ob.getCipherText(), masterKey, ob.getSalt());
         } catch (GeneralSecurityException ex) {

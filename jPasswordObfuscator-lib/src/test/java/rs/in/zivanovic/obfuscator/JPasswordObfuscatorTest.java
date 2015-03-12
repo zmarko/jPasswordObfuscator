@@ -40,11 +40,11 @@ public class JPasswordObfuscatorTest {
     private final JPasswordObfuscator engine = new JPasswordObfuscator();
 
     @Test
-    public void testObfuscateDeObfuscate() {
+    public void testObfuscateUnObfuscate() {
         String ob = engine.obfuscate(masterKey, data);
         System.out.println(ob);
-        byte[] deob = engine.deObfuscate(masterKey, ob);
-        assertArrayEquals(data, deob);
+        byte[] unob = engine.unObfuscate(masterKey, ob);
+        assertArrayEquals(data, unob);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -53,10 +53,10 @@ public class JPasswordObfuscatorTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void testObfuscateDeObfuscateWrongMasterKey() {
+    public void testObfuscateUnObfuscateWrongMasterKey() {
         String ob = engine.obfuscate(masterKey1, data);
-        byte[] deob = engine.deObfuscate(masterKey2, ob);
-        assertThat(data, not(equalTo(deob)));
+        byte[] unob = engine.unObfuscate(masterKey2, ob);
+        assertThat(data, not(equalTo(unob)));
     }
 
     @Test
@@ -83,33 +83,33 @@ public class JPasswordObfuscatorTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void testDeobfuscateNullData() {
-        engine.deObfuscate(masterKey, null);
+    public void testUnobfuscateNullData() {
+        engine.unObfuscate(masterKey, null);
     }
 
     @Test(expected = RuntimeException.class)
-    public void testDeobfuscateGarbageData() {
-        engine.deObfuscate(masterKey, "23499999puchn-p23948hfrn-[8f2333331xd");
+    public void testUnobfuscateGarbageData() {
+        engine.unObfuscate(masterKey, "23499999puchn-p23948hfrn-[8f2333331xd");
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testDeobfuscateInvalidSignature() {
-        engine.deObfuscate(masterKey, "$INV$1$v1hACmQULBk=$ggRxqVe1fUMvUnzpLA6CoQ==");
+    public void testUnobfuscateInvalidSignature() {
+        engine.unObfuscate(masterKey, "$INV$1$v1hACmQULBk=$ggRxqVe1fUMvUnzpLA6CoQ==");
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testDeobfuscateTruncated() {
-        engine.deObfuscate(masterKey, "$rizobf$1$v1hACmQULBk=$");
+    public void testUnobfuscateTruncated() {
+        engine.unObfuscate(masterKey, "$rizobf$1$v1hACmQULBk=$");
     }
 
     @Test(expected = RuntimeException.class)
-    public void testDeobfuscateInvalidData() {
-        engine.deObfuscate(masterKey, "$rizobf$1$v1hACmQULBk=$ggRxqVe1fUMvUnzpLA6Coq");
+    public void testUnobfuscateInvalidData() {
+        engine.unObfuscate(masterKey, "$rizobf$1$v1hACmQULBk=$ggRxqVe1fUMvUnzpLA6Coq");
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testDeobfuscateInvalidVersion() {
-        engine.deObfuscate(masterKey, "$rizobf$211$v1hACmQULBk=$ggRxqVe1fUMvUnzpLA6Coq");
+    public void testUnobfuscateInvalidVersion() {
+        engine.unObfuscate(masterKey, "$rizobf$211$v1hACmQULBk=$ggRxqVe1fUMvUnzpLA6Coq");
     }
 
 }

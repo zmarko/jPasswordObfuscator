@@ -26,27 +26,25 @@ package rs.in.zivanovic.obfuscator;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.Parameters;
 import com.google.common.base.Joiner;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 /**
- * Implementation of the de-obfuscate command.
+ * Implementation of the un-obfuscate command.
  */
-@Parameters(commandDescription = "De-obfuscate sensitive data")
-public class DeObfuscateCommand implements Runnable {
+@Parameters(commandDescription = "Un-obfuscate sensitive data")
+public class UnobfuscateCommand implements Callable<String> {
 
-    @Parameter(names = {"-k", "--key"}, description = "Master key to use for de-obfuscation", required = true)
+    @Parameter(names = {"-k", "--key"}, description = "Master key to use for un-obfuscation", required = true)
     private String masterKey;
 
-    @Parameter(description = "obfuscated string to de-obfuscate", required = true)
-    private List<String> data;
+    @Parameter(description = "obfuscated string to un-obfuscate", required = true)
+    private List<String> params;
 
     @Override
-    public void run() {
-        JPasswordObfuscator jpo = new JPasswordObfuscator();
-        String obfuscated = Joiner.on(' ').skipNulls().join(data);
-        byte[] deObfuscated = jpo.deObfuscate(masterKey.toCharArray(), obfuscated);
-        System.out.println(new String(deObfuscated, StandardCharsets.UTF_8));
+    public String call() {
+        String obfuscated = Joiner.on(' ').skipNulls().join(params);
+        return new Unobfuscated(masterKey.toCharArray(), obfuscated).asString();
     }
 
 }

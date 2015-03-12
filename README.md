@@ -13,7 +13,7 @@ Maven dependency is available at:
     <dependency>
         <groupId>rs.in.zivanovic</groupId>
         <artifactId>j-password-obfuscator</artifactId>
-        <version>1.0.0</version>
+        <version>1.1.0</version>
     </dependency>
 
 ## Typical usage
@@ -23,8 +23,7 @@ Maven dependency is available at:
 Say we want to obfuscate our super secret data string "Hello World" using the secret key "key".
 We'd use the following snippet:
 
-    JPasswordObfuscator obfuscator = new JPasswordObfuscator();
-    String obfuscated = obfuscator.obfuscate("key".toCharArray(), "Hello World".getBytes(StandardCharsets.UTF_8));
+    String obfuscated = new Obfuscated("key".toCharArray(), "Hello World").toString();
     System.out.println(obfuscated);
 
 output will resemble this:
@@ -40,8 +39,7 @@ As with all secret keys, it is recommended to use random, or, at least, not easi
 
 When we want to un-obfuscate data:
 
-    JPasswordObfuscator obfuscator = new JPasswordObfuscator();
-    String original = obfuscator.deObfuscate("key".toCharArray(), "$rizobf$1$l7IwmuwEZnY=$F5K7LeIP0u1cSluV3wBXqQ==");
+    String original = new Unobfuscated("key".toCharArray(), "$rizobf$1$l7IwmuwEZnY=$F5K7LeIP0u1cSluV3wBXqQ==").asString();
     System.out.println(original);
 
 and we get our original super secret data back:

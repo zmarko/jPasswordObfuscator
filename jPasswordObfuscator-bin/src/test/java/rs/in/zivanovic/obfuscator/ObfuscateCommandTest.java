@@ -21,30 +21,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package rs.in.zivanovic.obfuscator.impl;
+package rs.in.zivanovic.obfuscator;
+
+import com.google.common.base.Splitter;
+import com.google.common.collect.Iterables;
+import java.util.concurrent.Callable;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+import org.junit.Test;
 
 /**
- * Obfuscator/un-obfuscator interface.
+ * Obfuscator command-line utility unit tests.
  */
-public interface Obfuscator {
+public class ObfuscateCommandTest {
 
-    /**
-     * Obfuscate sensitive data using supplied master key.
-     *
-     * @param masterKey master key to use for data obfuscation
-     * @param data sensitive data to obfuscate
-     *
-     * @return obfuscated string
-     */
-    ObfuscatedData obfuscate(char[] masterKey, byte[] data);
+    private String run(String args) throws Exception {
+        Iterable<String> a = Splitter.on(' ').split(args);
+        ParsedCommandLine pcl = new ParsedCommandLine(Iterables.toArray(a, String.class));
+        Callable<String> c = pcl.getCommand();
+        return c.call();
+    }
 
-    /**
-     * un-obfuscate data using supplied master key.
-     *
-     * @param masterKey master key to use for data un-obfuscation; must match master key used for obfuscation
-     * @param data string obfuscated with {@link #obfuscate} to un-obfuscate
-     *
-     * @return
-     */
-    byte[] unObfuscate(char[] masterKey, ObfuscatedData data);
+    @Test
+    public void testObfuscateUnobfuscate() throws Exception {
+        String o = run("o -k test test");
+        String d = run("u -k test " + o);
+        assertThat("test", equalTo(d));
+    }
+
 }

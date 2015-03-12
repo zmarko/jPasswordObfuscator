@@ -36,6 +36,13 @@ public class ObfuscatedData {
     private final byte[] salt;
     private final byte[] cipherText;
 
+    /**
+     * Build new obfuscated data container.
+     *
+     * @param version    version of the algorithm used to obfuscate data
+     * @param salt       random salt bytes
+     * @param cipherText obfuscated data
+     */
     public ObfuscatedData(int version, byte[] salt, byte[] cipherText) {
         this.version = version;
         this.salt = Arrays.copyOf(salt, salt.length);
@@ -48,6 +55,13 @@ public class ObfuscatedData {
                 Base64.toBase64String(cipherText));
     }
 
+    /**
+     * Parse string containing obfuscated data.
+     *
+     * @param obfuscatedString obfuscated string to parse
+     *
+     * @return parsed data
+     */
     public static ObfuscatedData fromString(String obfuscatedString) {
         String[] parts = obfuscatedString.split("\\$");
         if (parts.length != 5) {

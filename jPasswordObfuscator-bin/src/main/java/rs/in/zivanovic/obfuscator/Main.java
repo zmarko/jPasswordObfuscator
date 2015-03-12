@@ -23,41 +23,31 @@
  */
 package rs.in.zivanovic.obfuscator;
 
-import com.beust.jcommander.JCommander;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
+import java.util.concurrent.Callable;
 
 /**
- * Main entry point.
+ * Obfuscator command line utility main class.
  */
 public class Main {
 
     private Main() {
     }
 
+    /**
+     * Entry point.
+     *
+     * @param args command line arguments
+     */
     public static void main(String[] args) {
-        JCommander jc = new JCommander();
-        Map<String, Runnable> commands = new HashMap<>();
-        Map<String, String[]> aliases = new HashMap<>();
-        commands.put("o", new ObfuscateCommand());
-        aliases.put("o", new String[]{"ob", "obfuscate"});
-        commands.put("d", new DeObfuscateCommand());
-        aliases.put("d", new String[]{"deob", "deobfuscate"});
-        for (Entry<String, Runnable> e : commands.entrySet()) {
-            String[] a = aliases.get(e.getKey());
-            jc.addCommand(e.getKey(), e.getValue(), a);
-        }
-
         try {
-            jc.parse(args);
-            if (commands.keySet().contains(jc.getParsedCommand())) {
-                Runnable r = commands.get(jc.getParsedCommand());
-                r.run();
+            ParsedCommandLine pcl = new ParsedCommandLine(args);
+            Callable<String> command = pcl.getCommand();
+            if (command == null) {
+                System.out.println(pcl.getHelpText());
             } else {
-                jc.usage();
+                System.out.println(command.call());
             }
-        } catch (RuntimeException ex) {
+        } catch (Exception ex) {
             System.err.println("ERROR: " + ex.getMessage());
         }
     }

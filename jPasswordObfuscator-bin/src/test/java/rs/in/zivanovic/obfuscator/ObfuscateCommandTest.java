@@ -21,20 +21,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package rs.in.zivanovic.obfuscator.impl;
+package rs.in.zivanovic.obfuscator;
+
+import com.google.common.base.Splitter;
+import com.google.common.collect.Iterables;
+import java.util.concurrent.Callable;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+import org.junit.Test;
 
 /**
- * Obfuscation / de-obfuscation -related exceptions.
+ * Obfuscator command-line utility unit tests.
  */
-public class ObfuscatorException extends RuntimeException {
+public class ObfuscateCommandTest {
 
-    /**
-     * Wrap throwable into obfuscator exception.
-     *
-     * @param cause throwable to wrap
-     */
-    public ObfuscatorException(Throwable cause) {
-        super(cause);
+    private String run(String args) throws Exception {
+        Iterable<String> a = Splitter.on(' ').split(args);
+        ParsedCommandLine pcl = new ParsedCommandLine(Iterables.toArray(a, String.class));
+        Callable<String> c = pcl.getCommand();
+        return c.call();
+    }
+
+    @Test
+    public void testObfuscateUnobfuscate() throws Exception {
+        String o = run("o -k test test");
+        String d = run("u -k test " + o);
+        assertThat("test", equalTo(d));
     }
 
 }

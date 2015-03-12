@@ -51,12 +51,36 @@ public class NewApiTest {
         assertThat(unob, equalTo(dataS));
     }
 
+    @Test
+    public void testObfuscateUnobfuscateArraysV1() {
+        String o = new Obfuscated(key, dataBA, 1).toString();
+        byte[] unob = new Unobfuscated(key, o).asByteArray();
+        assertThat(unob, equalTo(dataBA));
+    }
+
+    @Test
+    public void testObfuscateUnobfuscateStringsV1() {
+        String o = new Obfuscated(key, dataS, 1).toString();
+        String unob = new Unobfuscated(key, o).asString();
+        assertThat(unob, equalTo(dataS));
+    }
+
     @Test(expected = NullPointerException.class)
     public void testUnobfuscationClearsData() {
         String o = new Obfuscated(key, dataBA).toString();
         Unobfuscated unob = new Unobfuscated(key, o);
         unob.asByteArray();
         unob.asByteArray();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testObfuscatedInvalidVersion() {
+        String o = new Obfuscated(key, dataS, -1).toString();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testUnobfuscatedInvalidVersion() {
+        String o = new Unobfuscated(key, "$rizobf$-1$F6Krv4H91RE=$NjytmuPjmfZbwQjqUWcbDg==").asString();
     }
 
 }

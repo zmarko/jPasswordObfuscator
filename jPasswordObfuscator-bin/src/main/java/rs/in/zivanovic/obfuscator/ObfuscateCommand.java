@@ -26,14 +26,14 @@ package rs.in.zivanovic.obfuscator;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.Parameters;
 import com.google.common.base.Joiner;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 /**
  * Implementation of the obfuscate command.
  */
 @Parameters(commandDescription = "Obfuscate sensitive data")
-public class ObfuscateCommand implements Runnable {
+public class ObfuscateCommand implements Callable<String> {
 
     @Parameter(names = {"-k", "--key"}, description = "Master key to use for obfuscation", required = true)
     private String masterKey;
@@ -43,14 +43,12 @@ public class ObfuscateCommand implements Runnable {
     private int version = 1;
 
     @Parameter(description = "data to obfuscate", required = true)
-    private List<String> data;
+    private List<String> params;
 
     @Override
-    public void run() {
-        JPasswordObfuscator jpo = new JPasswordObfuscator();
-        byte[] dataBytes = Joiner.on(' ').join(data).getBytes(StandardCharsets.UTF_8);
-        String s = jpo.obfuscate(masterKey.toCharArray(), dataBytes, version);
-        System.out.println(s);
+    public String call() {
+        String data = Joiner.on(' ').join(params);
+        return new Obfuscated(masterKey.toCharArray(), data, version).toString();
     }
 
 }

@@ -40,7 +40,7 @@ public class Obfuscated {
     /**
      * Build new obfuscation wrapper using latest obfuscation algorithm version.
      *
-     * @param key master key to use for obfuscation
+     * @param key  master key to use for obfuscation
      * @param data data to obfuscate
      */
     public Obfuscated(char[] key, String data) {
@@ -50,7 +50,18 @@ public class Obfuscated {
     /**
      * Build new obfuscation wrapper using latest obfuscation algorithm version.
      *
-     * @param key master key to use for obfuscation
+     * @param key     master key to use for obfuscation
+     * @param data    data to obfuscate
+     * @param version version of the obfuscation algorithm to use
+     */
+    public Obfuscated(char[] key, String data, int version) {
+        this(key, data.getBytes(StandardCharsets.UTF_8), version);
+    }
+
+    /**
+     * Build new obfuscation wrapper using latest obfuscation algorithm version.
+     *
+     * @param key  master key to use for obfuscation
      * @param data data to obfuscate
      */
     public Obfuscated(char[] key, byte[] data) {
@@ -60,8 +71,8 @@ public class Obfuscated {
     /**
      * Build new obfuscation wrapper using specified obfuscation algorithm version.
      *
-     * @param key master key to use for obfuscation
-     * @param data data to obfuscate
+     * @param key     master key to use for obfuscation
+     * @param data    data to obfuscate
      * @param version version of the obfuscation algorithm to use
      */
     public Obfuscated(char[] key, byte[] data, int version) {

@@ -41,6 +41,10 @@ public class V1ObfuscatorImpl extends PBEObfuscatorImpl {
     private static final int SALT_LEN = 8;
     private static final int ITERATION_COUNT = 16_000;
 
+    /**
+     * Build new PBE-based obfuscator using PBEWithSHA256And128BitAES-CBC-BC with 8 bytes random salt and 16000
+     * iterations.
+     */
     public V1ObfuscatorImpl() {
         super(VERSION, ALGO, PROVIDER, ITERATION_COUNT, SALT_LEN);
     }
